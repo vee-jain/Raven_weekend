@@ -1,0 +1,1 @@
+In this study, we test whether ravens anticipate and respond to predictable weekday-weekend patterns following (1) a ‘5+2’ structure, or if they respond (2) flexibly to fluctuations in direct human activity levels.
