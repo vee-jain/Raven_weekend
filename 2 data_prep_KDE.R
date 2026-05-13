@@ -187,7 +187,7 @@ fit <- lm(iso_area ~ sample_size, data = df)
 # Segmented regression with starting breakpoint (psi = 15)
 seg_fit <- segmented(fit, seg.Z = ~sample_size, psi = 15)
 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx6.pdf",
+pdf("SIplotx6.pdf",
     width = 6, height = 6)
 # Plot points
 plot(df$sample_size, df$iso_area,
@@ -206,7 +206,7 @@ fit <- lm(prop_overlap_full ~ sample_size, data = df)
 # Segmented regression with starting breakpoint (psi = 15)
 seg_fit <- segmented(fit, seg.Z = ~sample_size, psi = 15)
 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx7.pdf",
+pdf("SIplotx7.pdf",
     width = 6, height = 6)
 # Plot points
 plot(df$sample_size, df$prop_overlap_full,
@@ -297,7 +297,7 @@ p2 <- ggplot() +
 library(ggpubr)
 quartz(height = 6, width = 12)
 ggarrange(p1, p2,ncol=2, nrow=1)
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx1.pdf")
+dev.copy2pdf(file="SIplotx1.pdf")
 
 #' map    
 n_reps <- 5  # for visualisation
@@ -339,7 +339,7 @@ ggplot() +
   scale_x_continuous(labels = ~ .x) +
   scale_y_continuous(labels = ~ .x) +
   theme(legend.position = "none")
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx2.pdf")
+dev.copy2pdf(file="SIplotx2.pdf")
 
 #### MCP DOWNSAMPLING EXERCISE ----
 ##### (1) Reference & downsampled KDEs ----
@@ -477,7 +477,7 @@ p2 <- ggplot() +
 
 quartz(height = 6, width = 12)
 ggarrange(p1, p2,ncol=2, nrow=1)
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx3.pdf")
+dev.copy2pdf(file="SIplotx3.pdf")
 
 #' map    
 n_reps <- 5  # for visualisation
@@ -522,7 +522,7 @@ ggplot() +
   scale_y_continuous(labels = ~ .x) +
   theme(legend.position = "none")
 
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx4.pdf")
+dev.copy2pdf(file="SIplotx4.pdf")
 
 
 ##### (3) Breakpoint analysis ----
@@ -679,7 +679,7 @@ fit <- lm(iso_area ~ sample_size, data = df)
 # Segmented regression with starting breakpoint (psi = 15)
 seg_fit <- segmented(fit, seg.Z = ~sample_size, psi = 15)
 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx8.pdf",
+pdf("SIplotx8.pdf",
     width = 6, height = 6)
 # Plot points
 plot(df$sample_size, df$iso_area,
@@ -698,7 +698,7 @@ fit <- lm(prop_overlap_full ~ sample_size, data = df)
 # Segmented regression with starting breakpoint (psi = 15)
 seg_fit <- segmented(fit, seg.Z = ~sample_size, psi = 15)
 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx9.pdf",
+pdf("SIplotx9.pdf",
     width = 6, height = 6)
 # Plot points
 plot(df$sample_size, df$prop_overlap_full,

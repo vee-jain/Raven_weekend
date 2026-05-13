@@ -68,7 +68,7 @@ ggplot(plot.data, aes(x = age_class, y = n_days, fill = threshold)) +
     fill = "Threshold"
   ) +
   theme_minimal(base_size = 14)
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx5.pdf")
+dev.copy2pdf(file="SIplotx5.pdf")
 
 xdata$weekday <- factor(xdata$weekday,
                         levels = c("Monday", 
@@ -93,7 +93,7 @@ ggplot(xdata, aes(x = weekday, y = ticket_sales, fill = type_of_day)) +
   labs(x ="Day of week",
        y = "Ticket sales",
        title = "b)")
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx10.pdf")
+dev.copy2pdf(file="SIplotx10.pdf")
 
 quartz(height = 5, width = 3)
 ggplot(xdata, aes(x = type_of_day, y = ticket_sales, fill = type_of_day)) +
@@ -106,7 +106,7 @@ ggplot(xdata, aes(x = type_of_day, y = ticket_sales, fill = type_of_day)) +
   labs(x =" Type of day",
        y = "Ticket sales",
        title = "a)")
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx11.pdf")
+dev.copy2pdf(file="SIplotx11.pdf")
 
 #### (4) check NA and str ----
 #' are there any NAs
@@ -181,7 +181,7 @@ table(xx$x) # for 35828 combinations of indv and date, 1 prob measure
 xdata$date = as.Date(xdata$date)
 
 #### (9) checking random slopes ----
-source("/Users/varalikajain/Documents/Stats course material/Source files/diagnostic_fcns.r")
+source("diagnostic_fcns.r")
 xx.re.tab = fe.re.tab(fe.model = "prob~ type_of_day*ticket_sales+
                       Origin*ticket_sales+
                       stringency_index*type_of_day+
@@ -216,7 +216,7 @@ t.data$tr.prob = (t.data$prob*(length(t.data$prob)-1)+0.5)/length(t.data$prob)
 #' use when you have zero or 1 in the response, 
 #' the beta distr cannot cope with it,
 #' will get infinite likelihoods 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplot5.pdf",
+pdf("SIplot5.pdf",
     width = 6, height = 6)
 plot(t.data$prob, t.data$tr.prob, xlab = "Original probability", ylab = "Transformed probability")
 abline(a =0, b = 1)
@@ -536,7 +536,7 @@ combined_plot <- ggarrange(
 
 quartz(7,18)
 combined_plot
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/plot1.pdf")
+dev.copy2pdf(file="plot1.pdf")
 
 #### (19) exporting ---- 
 #save.image("prob_5yr_new.RData")

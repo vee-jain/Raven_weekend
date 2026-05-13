@@ -9,7 +9,6 @@
 #### (1) Prepare working space----
 rm(list = ls())
 dev.off()
-setwd("/Users/varalikajain/Documents/Ravens/weekend/240312 Final")
 
 library(dplyr)
 library(ggplot2)
@@ -52,8 +51,6 @@ plot.data <- plot.data %>%
     pct_lab  = paste0(round(pct_lost, 1), "%")
   )
 
-#quartz(height = 5, width = 6)
-# Step 3 — plot
 ggplot(plot.data, aes(x = age_class, y = n_days, fill = threshold)) +
   geom_col(position = position_identity(), alpha = 0.5) +
   geom_text(
@@ -68,7 +65,6 @@ ggplot(plot.data, aes(x = age_class, y = n_days, fill = threshold)) +
     fill = "Threshold"
   ) +
   theme_minimal(base_size = 14)
-#dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplotx5.pdf")
 
 #### (4) check NA and str ----
 #' are there any NAs
@@ -142,7 +138,7 @@ table(xx$x) # for 35828 combinations of indv and date, 1 prob measure
 xdata$date = as.Date(xdata$date)
 
 #### (9) checking random slopes ----
-source("/Users/varalikajain/Documents/Stats course material/Source files/diagnostic_fcns.r")
+source("diagnostic_fcns.r")
 xx.re.tab = fe.re.tab(fe.model = "area_m2~ type_of_day*ticket_sales+
                       Origin*ticket_sales+
                       stringency_index*type_of_day+
@@ -466,7 +462,7 @@ combined_plot <- ggarrange(
 
 quartz(7,18)
 combined_plot
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/plot2.pdf")
+dev.copy2pdf(file="plot2.pdf")
   
 #### (19) exporting ---- 
 #save.image("mcp_5yr_new.RData")

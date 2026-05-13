@@ -4,9 +4,6 @@
 #' The final processed datasets are available on the Zenodo data
 #' repository associated with this study
 
-#load("final_data_prep.RData")
-#rm(list = setdiff(ls(), "ravens_5yr"))
-
 ####LOAD LIBRARIES----
 library(rgdal)
 library(sp)
@@ -173,7 +170,7 @@ sampling_5yr %>% filter(mean_interval < 60) %>%
   theme_minimal()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   labs(y = "Sampling interval", x = "Date")
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplot1.pdf")
+dev.copy2pdf(file="SIplot1.pdf")
 
 #' first set sampling to a minimum of 15 minutes
 #' convert to move2 object
@@ -266,7 +263,7 @@ acf_results_5yr %>%
   ylim(15, 150)+theme_minimal()+
   geom_hline(yintercept = 30, linetype = "dashed", color = "red", size = 0.5)+
   labs(x = "Metric", y = "Lag in minutes")
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplot1a.pdf")
+dev.copy2pdf(file="SIplot1a.pdf")
 
 summary(as.numeric(acf_results_5yr$lag_speed))
 summary(as.numeric(acf_results_5yr$lag_angle))
@@ -381,7 +378,7 @@ acf3 <- ggplot(acf_summary3, aes(x = lag, y = mean)) +
 
 quartz(height = 6, width = 14)
 ggarrange(acf1, acf2, acf3, ncol=3, nrow=1)
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplot2.pdf")
+dev.copy2pdf(file="SIplot2.pdf")
 
 ##### (4) ACF example for one individual ----
 xx <- ravens_5yr_15only %>% group_by(local_identifier, date) %>%
@@ -390,7 +387,7 @@ xx <- ravens_5yr_15only %>% group_by(local_identifier, date) %>%
 acf_example <- xx %>% filter(id_date=="Alfon2019-05-18") 
 acf_example <- acf_example[c(-60), ]
 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplot3.pdf",
+pdf("SIplot3.pdf",
     width = 12, height = 4)  # wide format for 3 columns
 par(mfrow = c(1, 3),
     mar = c(4, 4, 2, 1))
@@ -482,7 +479,7 @@ ravens_sf <- st_as_sf(x = ravens_coords_utm,
 ##### (3) Read in the AFS location data----
 #' AFS locations were identified using clusters of GPS fixes (from tracked ravens)
 #' near obvious anthropogenic structures
-afs <- read.csv('./input_df/AFSs.csv') #locs - locations
+afs <- read.csv('AFSs.csv') #locs - locations
 
 #' only interested in the game park
 afs <- afs[1,]
@@ -520,7 +517,7 @@ afs_revisits <- as.data.frame(afs_revisits$revisits)
 radii <- c(1:150) 
 titles <- paste(afs_coords$FID)
 
-pdf("~/Documents/Ravens/weekend/240312 Final/revisions/Supplementary Information/SIplot4.pdf",
+pdf("SIplot4.pdf",
     width = 6, height = 6)  # wide format for 3 columns
 plot(radii,afs_revisits[1,],
      ylab = "Total number of revisits", xlab = "Radii")
@@ -559,7 +556,7 @@ ravens_5yr_proj <- project_func(ravens_5yr_30min)
 ravens_6wk_proj <- project_func(ravens_6wk_30min)
 
 #####(3) Read in the AFS location data again----
-afs <- read.csv('./input_df/AFSs.csv') #locs - locations
+afs <- read.csv('AFSs.csv') #locs - locations
 
 #' only interested in the game park
 afs <- afs[1,]
@@ -663,7 +660,7 @@ intersect_6wk_df$location_lat <- ravens_6wk_30min$location_lat
 intersect_6wk_df$location_long <- ravens_6wk_30min$location_long
 
 #####(2) Read in the demography datafile----
-demog <- read.csv('./input_df/GPS Tagging information 2021.csv') 
+demog <- read.csv('GPS Tagging information 2021.csv') 
 head(demog)
 
 demog<- demog[!duplicated(demog$Name), ]
@@ -1053,7 +1050,7 @@ ggplot(xx, aes(max/1000, area_m2/1000000))+geom_point(alpha = 0.5, size = 2)+
   labs(y= expression("KDE area" ~(km^2)),
        x = "Maximum displacement from park (km)")+
   stat_smooth()
-dev.copy2pdf(file="~/Documents/Ravens/weekend/240312 Final/revisions/SIplotx14.pdf")
+dev.copy2pdf(file="SIplotx14.pdf")
 
 
 ####----COMBINE MOVEMENT METRICS----####
@@ -1075,7 +1072,7 @@ prob_daily_5yr <- merge(prob_daily_5yr, kde_5yr_area_df,
 
 ####FINAL 5YR WEEKLY DATASET----
 #####(1) Read in ticket sales data----
-ticket_sales<- read.csv("./input_df/Ticket sales.csv")
+ticket_sales<- read.csv("Ticket sales.csv")
 head(ticket_sales)
 ticket_sales$date <- as.Date(ticket_sales$date, format = "%d/%m/%Y")
 
@@ -1086,7 +1083,7 @@ range(prob_daily_5yr$date)
 prob_daily_5yr$date <- as.Date(prob_daily_5yr$date)
 
 #####(2) Add stringency index data----
-strin_idx <- read.csv("./input_df/owid-covid-data.csv", stringsAsFactors = T)
+strin_idx <- read.csv("owid-covid-data.csv", stringsAsFactors = T)
 str(strin_idx)
 strin_idx <- strin_idx %>% filter(location == "Austria") %>%
   dplyr::select(c(date, stringency_index))
@@ -1106,7 +1103,7 @@ prob_final_5yr <- ungroup(prob_final_5yr)
 
 ####FINAL 6WK BIHOURLY DATASET----
 #####(1) Read in hourly sales data----
-hourly_sales <- read.csv("./input_df/add_hourly_sales.csv")
+hourly_sales <- read.csv("add_hourly_sales.csv")
 
 hourly_sales <- hourly_sales %>% 
   mutate(
