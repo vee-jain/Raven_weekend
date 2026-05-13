@@ -634,7 +634,6 @@ intersect_6wk_df$wb_dist <- pt_dist_6wk
 #### SAFETY BACK-UP ----
 save.image("revision_data_prep_part_1.RData")
 rm(ravens_5yr) #also saved separately as an RData
-# "~/Documents/Ravens/weekend/240312 Final/ravens_5yr.RData"
 rm(acf_curve_df1, acf_curve_df2, acf_curve_df3,
    acf_example, acf_results_5yr, acf_summary1,
    acf_summary2, acf_summary3, acf1, acf2, acf3)
